@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Edit Job</title>
+
+    <style>
+        body {
+            font-family: Arial;
+            background: #f8fafc;
+            color: #1e293b;
+        }
+
+        .container {
+            width: 500px;
+            margin: 80px auto;
+            background: #ffffff;
+            padding: 30px;
+            border-radius: 10px;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        input, textarea {
+            width: 100%;
+            padding: 10px;
+            margin-top: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #e2e8f0;
+            border-radius: 4px;
+        }
+
+        button {
+            padding: 10px 18px;
+            background: #1e40af;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+    </style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+    <h2>Edit Job</h2>
+
+    <form method="POST">
+
+        <label>Job Title</label>
+        <input type="text" name="title" value="{{ job.title }}">
+
+        <label>Skills</label>
+        <input type="text" name="skills" value="{{ job.skills }}">
+
+        <label>Salary</label>
+        <input type="text" name="salary" value="{{ job.salary }}">
+
+        <button type="submit">Update Job</button>
+
+    </form>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,113 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<title>Student Dashboard</title>
+
+<style>
+    body {
+        font-family: Arial;
+        background: #f8fafc;
+        color: #1e293b;
+    }
+
+    .container {
+        width: 800px;
+        margin: 50px auto;
+    }
+
+    .card {
+        background: #ffffff;
+        padding: 25px;
+        border-radius: 10px;
+        margin-bottom: 20px;
+        border: 1px solid #e2e8f0;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+    .btn {
+        padding: 10px 15px;
+        background: #1e40af;
+        border: none;
+        color: white;
+        font-weight: bold;
+        cursor: pointer;
+    }
+
+    .incomplete {
+        color: #ef4444;
+    }
+
+    .apply {
+        background: #22c55e;
+        color: white;
+    }
+</style>
+</head>
+
+<body>
+    <div class="container">
+        <!-- SEARCH BAR -->
+        <div class="card">
+            <form method="GET" action="/student_dashboard">
+                <input type="text" name="search" placeholder="Search by Company, Position, or Skills..."
+                    style="padding:10px; width:70%; border-radius:6px; border:none;">
+
+                <button class="btn">Search</button>
+            </form>
+        </div>
+        <!-- PROFILE SECTION -->
+        <div class="card">
+            <h2>Student Profile</h2>
+
+            {% if student %}
+            <p><b>Department:</b> {{ student.department }}</p>
+            <p><b>CGPA:</b> {{ student.cgpa }}</p>
+            <p><b>Resume:</b> {{ student.resume }}</p>
+            {% else %}
+            <p class="incomplete">⚠ Profile Incomplete</p>
+            {% endif %}
+
+            <br>
+
+            <a href="/complete-student-profile">
+                <button class="btn">Complete / Edit Profile</button>
+            </a>
+        </div>
+
+        <a href="/my-applications">
+            <button class="btn" style="background:#f97316; color:black;">
+                View Application History
+            </button>
+        </a>
+
+        <br><br>
+        <!-- JOBS SECTION -->
+        <h2>Available Jobs</h2>
+        {% for job in jobs %}
+        <div class="card">
+
+            <p><b>Company:</b> {{ job.company.company_name }}</p>
+            <p><b>Title:</b> {{ job.title }}</p>
+            <p><b>Skills:</b> {{ job.skills }}</p>
+            <p><b>Salary:</b> {{ job.salary }}</p>
+
+            {% if job.id in applied_jobs %}
+            <button class="btn" style="background: gray; cursor: not-allowed;">
+                Applied ✓ ({{ applied_jobs[job.id] }})
+            </button>
+            {% else %}
+            <a href="/apply-job/{{ job.id }}">
+                <button class="btn apply">Apply Job</button>
+            </a>
+            {% endif %}
+            <a href="/company-details/{{ job.company.id }}">
+                <button class="btn" style="background:#facc15;">
+                    View Company Details
+                </button>
+            </a>
+        </div>
+        {% endfor %}
+
+    </div>
+
+    {% endblock %}

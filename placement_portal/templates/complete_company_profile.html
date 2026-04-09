@@ -1,0 +1,75 @@
+{% extends "base.html" %}
+{% block title %}Complete Company Profile{% endblock %}
+
+{% block content %}
+<h2>Complete Your Company Profile</h2>
+<style>
+    .company-form {
+        display: flex;
+        gap: 20px;
+        flex-wrap: wrap;
+        align-items: flex-end;
+    }
+    .form-group {
+        display: flex;
+        flex-direction: column;
+        flex: 1;
+        min-width: 200px;
+    }
+    .form-group label {
+        margin-bottom: 5px;
+        font-weight: bold;
+    }
+    .form-group input {
+        padding: 8px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+    }
+    .form-actions {
+        width: 100%;
+        margin-top: 20px;
+    }
+    .form-actions button {
+        padding: 10px 20px;
+        background-color: #1e40af;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+    .form-actions button:hover {
+        background-color: #1e3a8a;
+    }
+</style>
+
+<form method="POST" class="company-form">
+    <div class="form-group">
+        <label for="company_name">Company Name:</label>
+        <input type="text" id="company_name" name="company_name" value="{{ profile.company_name if profile else '' }}" required>
+    </div>
+    
+    <div class="form-group">
+        <label for="industry_type">Industry Type:</label>
+        <input type="text" id="industry_type" name="industry_type" value="{{ profile.industry_type if profile else '' }}" required>
+    </div>
+    
+    <div class="form-group">
+        <label for="active_website">Active Website:</label>
+        <input type="url" id="active_website" name="active_website" value="{{ profile.active_website if profile else '' }}">
+    </div>
+    
+    <div class="form-group">
+        <label for="company_location">Company Location:</label>
+        <input type="text" id="company_location" name="company_location" value="{{ profile.company_location if profile else '' }}" required>
+    </div>
+    
+    <div class="form-group">
+        <label for="company_strength">Company Strength:</label>
+        <input type="text" id="company_strength" name="company_strength" value="{{ profile.company_strength if profile else '' }}">
+    </div>
+
+    <div class="form-actions">
+        <button type="submit">Save Profile</button>
+    </div>
+</form>
+{% endblock %}

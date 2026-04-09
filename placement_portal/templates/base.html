@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Placement Portal{% endblock %}</title>
+
+  <style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Segoe UI", Arial, sans-serif;
+    }
+
+    body {
+        background: #f8fafc;
+        color: #1e293b;
+    }
+
+    /* NAVBAR */
+    .navbar {
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(10px);
+        padding: 18px 80px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-bottom: 1px solid #e2e8f0;
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+    .logo {
+        font-size: 22px;
+        font-weight: bold;
+        color: #1e40af;
+        letter-spacing: 1px;
+    }
+
+    .nav-links {
+        display: flex;
+        align-items: center;
+    }
+
+    .nav-links a {
+        color: #475569;
+        margin-left: 35px;
+        text-decoration: none;
+        font-weight: 500;
+        font-size: 15px;
+        position: relative;
+        transition: 0.3s ease;
+    }
+
+    /* Hover underline animation */
+    .nav-links a::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        bottom: -6px;
+        width: 0%;
+        height: 2px;
+        background: #3b82f6;
+        transition: 0.3s ease;
+    }
+
+    .nav-links a:hover {
+        color: #1e40af;
+    }
+
+    .nav-links a:hover::after {
+        width: 100%;
+    }
+
+    /* CTA Button Style */
+    .nav-btn {
+        margin-left: 40px;
+        padding: 8px 18px;
+        background: #1e40af;
+        color: #ffffff !important;
+        border-radius: 6px;
+        font-weight: 600;
+        transition: 0.3s;
+    }
+
+    .nav-btn:hover {
+        background: #1e3a8a;
+        transform: translateY(-2px);
+    }
+
+    footer {
+        background: #f1f5f9;
+        text-align: center;
+        padding: 20px;
+        margin-top: 60px;
+        border-top: 1px solid #e2e8f0;
+        color: #64748b;
+    }
+
+    .container {
+        width: 85%;
+        margin: auto;
+    }
+</style>
+</head>
+<body>
+
+<div class="navbar">
+    <div class="logo">Placement Portal</div>
+
+    <div class="nav-links">
+        <a href="/">Home</a>
+        
+        {% if not session.get('user_id') %}
+        <a href="/login">Login</a>
+        <a href="/register" class="nav-btn">Register</a>
+        {% else %}
+        <a href="/logout">Logout</a>
+        {% endif %}
+    </div>
+</div>
+
+{% block content %}{% endblock %}
+
+<footer>
+    © 2026 Placement Portal Made by Manas Dudeja  | All Rights Reserved
+</footer>
+
+</body>
+</html>
